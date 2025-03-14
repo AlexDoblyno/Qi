@@ -61,20 +61,13 @@ public class WebSocketTests {
 
     @Test
     @Order(1)
-    @DisplayName("Connect 1 User")
-    public void connectSingleUser() {
-        connectToGame(white, gameID, true, Set.of(), Set.of()); //Connects 1 User to the game
+    @DisplayName("Normal Connect")
+    public void connectGood() {
+        setupNormalGame();
     }
 
     @Test
     @Order(2)
-    @DisplayName("Normal Connect")
-    public void connectGood() {
-        setupNormalGame();    //Connects 3 Users to the game, and notifies others upon connection
-    }
-
-    @Test
-    @Order(3)
     @DisplayName("Connect Bad GameID")
     public void connectBadGameID() {
         connectToGame(white, gameID + 1, false, Set.of(), Set.of()); //player connect with an incorrect game id
@@ -82,7 +75,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(3)
+    @Order(2)
     @DisplayName("Connect Bad AuthToken")
     public void connectBadAuthToken() {
         connectToGame(new WebsocketUser(black.username(), "badAuth"), gameID, false, Set.of(), Set.of());
@@ -90,7 +83,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(4)
+    @Order(3)
     @DisplayName("Normal Make Move")
     public void validMove() {
         setupNormalGame();
@@ -101,7 +94,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     @DisplayName("Make Move Bad Authtoken")
     public void makeMoveBadAuthtoken() {
         setupNormalGame();
@@ -112,7 +105,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     @DisplayName("Make Invalid Move")
     public void invalidMoveBadMove() {
         setupNormalGame();
@@ -123,7 +116,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     @DisplayName("Make Move Wrong Turn")
     public void invalidMoveWrongTurn() {
         setupNormalGame();
@@ -134,7 +127,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     @DisplayName("Make Move for Opponent")
     public void invalidMoveOpponent() {
         setupNormalGame();
@@ -145,7 +138,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     @DisplayName("Make Move Observer")
     public void invalidMoveObserver() {
         setupNormalGame();
@@ -156,7 +149,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     @DisplayName("Make Move Game Over")
     public void invalidMoveGameOver() {
         setupNormalGame();
@@ -176,7 +169,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     @DisplayName("Normal Resign")
     public void validResign() {
         setupNormalGame();
@@ -184,7 +177,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(7)
+    @Order(6)
     @DisplayName("Cannot Move After Resign")
     public void moveAfterResign() {
         setupNormalGame();
@@ -196,7 +189,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(7)
+    @Order(6)
     @DisplayName("Observer Resign")
     public void invalidResignObserver() {
         setupNormalGame();
@@ -206,7 +199,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(7)
+    @Order(6)
     @DisplayName("Double Resign")
     public void invalidResignGameOver() {
         setupNormalGame();
@@ -217,7 +210,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(8)
+    @Order(7)
     @DisplayName("Leave Game")
     public void leaveGame() {
         setupNormalGame();
@@ -230,7 +223,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(9)
+    @Order(8)
     @DisplayName("Join After Leave Game")
     public void joinAfterLeaveGame() {
         setupNormalGame();
@@ -249,7 +242,7 @@ public class WebSocketTests {
     }
 
     @Test
-    @Order(10)
+    @Order(9)
     @DisplayName("Multiple Concurrent Games")
     public void multipleConcurrentGames() {
         setupNormalGame();
