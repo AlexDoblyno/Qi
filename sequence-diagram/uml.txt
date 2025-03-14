@@ -1,0 +1,111 @@
+actor Client
+participant Server
+participant Handler
+participant Service
+participant DataAccess
+database db
+
+entryspacing 0.9
+group #navy Registration #white
+Client -> Server: [POST] /user\n{"username":" ", "password":" ", "email":" "}
+Server -> Handler: {"username":" ", "password":" ", "email":" "}
+Handler -> Service: register(RegisterRequest)
+Service -> DataAccess: getUser(username)
+DataAccess -> db: Find UserData by username
+DataAccess --> Service: null
+Service -> DataAccess: createUser(userData)
+DataAccess -> db: Add UserData
+Service -> DataAccess: createAuth(authData)
+DataAccess -> db: Add AuthData
+Service --> Handler: RegisterResult
+Handler --> Server: {"username" : " ", "authToken" : " "}
+Server --> Client: 200\n{"username" : " ", "authToken" : " "}
+end
+
+group #orange Login #white
+Client -> Server: [POST] /session\n{username, password}
+Server -> Handler: "username":" ", "password":" "
+Handler -> Service: login(LoginRequest)
+Service -> DataAccess: getUser(username)
+DataAccess -> db: select username, password from user
+DataAccess --> Service: UserData
+Service -> DataAccess: createAuth(username)
+DataAccess -> db: insert username, authToken into auth
+DataAccess --> Service: authToken
+Service --> Handler: LoginResult
+Handler --> Server: "username" : "<username>", "authToken" : "<token>"
+Server --> Client: 200 \n"username" : "<username>", "authToken" : "<token>"
+end
+
+group #green Logout #white
+Client -> Server: [DELETE] /session\nauthToken
+Server -> Handler: authorization: <authToken>\n
+Handler -> Service: logout(LogoutRequest)
+Service -> DataAccess: deleteAuth(authToken)
+DataAccess -> db: delete AuthData from authToken
+Service <-- DataAccess: null
+Handler <-- Service: LogoutResult
+Server <-- Handler: {}
+Client <-- Server: 200\n {}
+end
+
+group #red List Games #white
+Client -> Server: [GET] /game\nauthToken
+Server -> Handler: "authorization": "<authToken>"
+Handler -> Service: listGames(ListGameRequest)
+Service -> DataAccess: getAuth(authToken)
+DataAccess -> db: select authToken, username from auth
+DataAccess --> Service: AuthData
+Service -> DataAccess: listGames()
+DataAccess-> db: select games
+DataAccess --> Service: GameList
+Service --> Handler: ListGameResult
+Handler --> Server: "games"
+Server --> Client: 200\n "games"
+end
+
+group #purple Create Game #white
+Client -> Server: [POST] /game\nauthToken\n{gameName}
+Server->Handler:authorization: <authToken>\n{ "gameName":" " }\n
+Handler -> Service: createGame(CreateGameRequest)
+Service -> DataAccess: getAuth(authToken)
+DataAccess -> db: select AuthData from auth
+Service <-- DataAccess: AuthData
+Service -> DataAccess: createGame(gameData)
+Service <-- DataAccess: gameID
+DataAccess -> db: insert ChessGame into game
+Handler <-- Service: CreateGameResult
+Server <-- Handler: "gameID"
+Client <-- Server: 200\n "gameID"
+end
+
+group #yellow Join Game #black
+Client -> Server: [PUT] /game\nauthToken\n{playerColor, gameID}
+Server -> Handler: {"authorization": "<authToken>"}\{ "playerColor":"<playerColor>", "gameID": "<gameID>"}
+Handler -> Service: joinGame(JoinGameRequest)
+Service -> DataAccess: getAuth(authToken)
+DataAccess -> db: select authToken, username from auth
+DataAccess --> Service: AuthData
+Service -> DataAccess: getGame(gameID)
+DataAccess -> db: select game from games
+DataAccess --> Service: GameData
+Service -> DataAccess: get player, color and check if taken
+DataAccess -> db: insert player, color into games
+Service --> Handler: JoinGameResult
+Handler --> Server: {}
+Server --> Client: 200\n {}
+end
+
+group #gray Clear application #white
+Client -> Server: [DELETE] /db
+Server -> Handler: {}
+Handler -> Service: deleteDatabase()
+Service -> DataAccess: AuthDAO clear()
+Service -> DataAccess: UserDAO clear()
+Service -> DataAccess: GameDAO clear()
+DataAccess -> db: delete from <table>
+Service <-- DataAccess: null
+Handler <-- Service: DeleteDatabaseResult
+Server <-- Handler: {}
+Client <- Server: 200\n {}
+end
