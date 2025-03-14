@@ -2,14 +2,15 @@ package passoff.chess.piece;
 
 import chess.ChessPosition;
 import org.junit.jupiter.api.Test;
-import passoff.chess.TestUtilities;
+
+import static passoff.chess.TestUtilities.validateMoves;
 
 public class RookMoveTests {
 
     @Test
     public void rookMoveUntilEdge() {
 
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -32,7 +33,7 @@ public class RookMoveTests {
 
     @Test
     public void rookCaptureEnemy() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -54,7 +55,7 @@ public class RookMoveTests {
 
     @Test
     public void rookBlocked() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | |n|r|
                         | | | | | | | |p|
                         | | | | | | | | |

@@ -3,35 +3,30 @@ package passoff.chess;
 import chess.*;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class TestUtilities {
-    public static void validateMoves(String boardText, ChessPosition startPosition, int[][] endPositions) {
+    static public void validateMoves(String boardText, ChessPosition startPosition, int[][] endPositions) {
         var board = loadBoard(boardText);
         var testPiece = board.getPiece(startPosition);
         var validMoves = loadMoves(startPosition, endPositions);
         validateMoves(board, testPiece, startPosition, validMoves);
     }
 
-    public static void validateMoves(ChessBoard board, ChessPiece testPiece, ChessPosition startPosition,
-                                     List<ChessMove> validMoves) {
-        var pieceMoves = new ArrayList<>(testPiece.pieceMoves(board, startPosition));
-        validateMoves(validMoves, pieceMoves);
+    static public void validateMoves(ChessBoard board, ChessPiece testPiece, ChessPosition startPosition, Set<ChessMove> validMoves) {
+        var pieceMoves = new HashSet<>(testPiece.pieceMoves(board, startPosition));
+        assertCollectionsEquals(validMoves, pieceMoves, "Wrong moves");
     }
 
-    public static void validateMoves(List<ChessMove> expected, List<ChessMove> actual) {
-        Comparator<ChessMove> comparator = Comparator.comparingInt(TestUtilities::moveToInt);
-        expected.sort(comparator);
-        actual.sort(comparator);
-
-        Assertions.assertEquals(expected, actual, "Wrong moves");
+    static public <T> void assertCollectionsEquals(Collection<T> first, Collection<T> second, String message) {
+        Assertions.assertEquals(new HashSet<>(first), new HashSet<>(second), message);
+        Assertions.assertEquals(first.size(), second.size(), "Collections not the same size");
     }
 
-
-    private static final Map<Character, ChessPiece.PieceType> CHAR_TO_TYPE_MAP = Map.of(
+    final static Map<Character, ChessPiece.PieceType> CHAR_TO_TYPE_MAP = Map.of(
             'p', ChessPiece.PieceType.PAWN,
             'n', ChessPiece.PieceType.KNIGHT,
             'r', ChessPiece.PieceType.ROOK,
@@ -66,21 +61,8 @@ public class TestUtilities {
         return board;
     }
 
-    public static ChessBoard defaultBoard() {
-        return loadBoard("""
-                |r|n|b|q|k|b|n|r|
-                |p|p|p|p|p|p|p|p|
-                | | | | | | | | |
-                | | | | | | | | |
-                | | | | | | | | |
-                | | | | | | | | |
-                |P|P|P|P|P|P|P|P|
-                |R|N|B|Q|K|B|N|R|
-                """);
-    }
-
-    public static List<ChessMove> loadMoves(ChessPosition startPosition, int[][] endPositions) {
-        var validMoves = new ArrayList<ChessMove>();
+    public static Set<ChessMove> loadMoves(ChessPosition startPosition, int[][] endPositions) {
+        var validMoves = new HashSet<ChessMove>();
         for (var endPosition : endPositions) {
             validMoves.add(new ChessMove(startPosition,
                     new ChessPosition(endPosition[0], endPosition[1]), null));
@@ -88,12 +70,11 @@ public class TestUtilities {
         return validMoves;
     }
 
-    private static int positionToInt(ChessPosition position) {
-        return 10 * position.getRow() + position.getColumn();
-    }
-
-    private static int moveToInt(ChessMove move) {
-        return 1000 * positionToInt(move.getStartPosition()) + 10 * positionToInt(move.getEndPosition()) +
-                ((move.getPromotionPiece() != null) ? move.getPromotionPiece().ordinal() + 1 : 0);
+    public static void assertMoves(ChessGame game, Set<ChessMove> validMoves, ChessPosition position) {
+        var generatedMoves = game.validMoves(position);
+        var actualMoves = new HashSet<>(generatedMoves);
+        Assertions.assertEquals(generatedMoves.size(), actualMoves.size(), "Duplicate move");
+        Assertions.assertEquals(validMoves, actualMoves,
+                "ChessGame validMoves did not return the correct moves");
     }
 }

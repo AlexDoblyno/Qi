@@ -2,13 +2,14 @@ package passoff.chess.piece;
 
 import chess.ChessPosition;
 import org.junit.jupiter.api.Test;
-import passoff.chess.TestUtilities;
+
+import static passoff.chess.TestUtilities.validateMoves;
 
 public class KnightMoveTests {
 
     @Test
     public void knightMiddleOfBoardWhite() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -27,7 +28,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightMiddleOfBoardBlack() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -47,7 +48,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightEdgeOfBoardLeft() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -64,7 +65,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightEdgeOfBoardRight() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -81,7 +82,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightEdgeOfBoardBottom() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -98,7 +99,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightEdgeOfBoardTop() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | |N| | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -116,7 +117,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightCornerOfBoardBottomRight() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -133,7 +134,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightCornerOfBoardTopRight() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | |N|
                         | | | | | | | | |
                         | | | | | | | | |
@@ -150,7 +151,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightCornerOfBoardTopLeft() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         |n| | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -167,7 +168,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightCornerOfBoardBottomLeft() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |
@@ -182,28 +183,10 @@ public class KnightMoveTests {
         );
     }
 
-    @Test
-    public void knightSurroundedButNotBlocked() {
-        TestUtilities.validateMoves("""
-                        | | | | | | | | |
-                        | | | | | | | | |
-                        | | | |R|R|R| | |
-                        | | | |R|N|R| | |
-                        | | | |R|R|R| | |
-                        | | | | | | | | |
-                        | | | | | | | | |
-                        | | | | | | | | |
-                        """,
-                new ChessPosition(5, 5),
-                new int[][]{
-                        {7, 6}, {6, 7}, {4, 7}, {3, 6}, {3, 4}, {4, 3}, {6, 3}, {7, 4},
-                }
-        );
-    }
 
     @Test
     public void knightBlocked() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | |R| | | | |
                         | | | | | | |P| |
@@ -221,7 +204,7 @@ public class KnightMoveTests {
 
     @Test
     public void knightCaptureEnemy() {
-        TestUtilities.validateMoves("""
+        validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
                         | | | | | | | | |

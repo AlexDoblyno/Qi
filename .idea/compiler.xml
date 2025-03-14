@@ -6,10 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="client" />
-        <module name="server" />
-        <module name="shared" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="chess" target="21" />
+      <module name="client" target="21" />
+      <module name="server" target="21" />
+      <module name="shared" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>
