@@ -183,14 +183,14 @@ public class EnPassantTests {
     @DisplayName("Can Only En Passant on Next Turn")
     public void missedEnPassant() throws InvalidMoveException {
         ChessBoard board = loadBoard("""
-                      | | | | | | | | |
-                | | |p| | | | | |
-                | | | | | | | |P|
-                | |P| | | | | | |
                 | | | | | | | | |
-                | | | | | | | |p|
-                | | | | | | | | |
-                | | | | | | | | |
+		        | | |p| | | | | |
+		        | | | | | | | |P|
+		        | |P| | | | | | |
+		        | | | | | | | | |
+		        | | | | | | | |p|
+		        | | | | | | | | |
+		        | | | | | | | | |
                 """);
         ChessGame game = new ChessGame();
         game.setBoard(board);
