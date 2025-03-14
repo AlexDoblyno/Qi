@@ -12,7 +12,7 @@ public class ClearHandler implements Handler {
     public ClearHandler() {
         clearService = new ClearService();
     }
-
+//用于添加警告
     @SuppressWarnings("unused")
     public Object clearHandler(Request req, Response res) throws DataAccessException { //noinspection UnusedParameter
 

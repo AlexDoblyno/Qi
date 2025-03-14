@@ -46,7 +46,7 @@ public class Server {
 
         Spark.staticFiles.location("web");
 
-        // Register your endpoints and handle exceptions here.
+        //在此注册端点并处理异常。
         Spark.delete("/db", clearHandler::clearHandler);
         Spark.post("/user", userHandler::registerHandler);
         Spark.post("/session", userHandler::loginHandler);
@@ -57,7 +57,7 @@ public class Server {
 
         Spark.exception(Exception.class, this::errorHandler);
 
-        //This line initializes the server and can be removed once you have a functioning endpoint 
+        //这一行用于初始化服务器，一旦端点开始运行，即可删除
         Spark.init();
 
         Spark.awaitInitialization();
