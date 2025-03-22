@@ -67,3 +67,13 @@ public class PreloginUI {
             gameNames.add(gameName);
         }
     }
+
+    private void displayHelp() {
+        System.out.println("Available commands:");
+        System.out.println("help         - Displays this help message.");
+        System.out.println("logout       - Logs out and returns to the login screen.");
+        System.out.println("create game  - Creates a new game (does not join the player).");
+        System.out.println("list games   - Lists all active games on the server.");
+        System.out.println("play game    - Joins a game as a player.");
+        System.out.println("observe game - Observes a game.");
+    }
