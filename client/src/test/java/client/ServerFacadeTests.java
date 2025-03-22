@@ -1,28 +1,38 @@
 package client;
 
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import chess.ChessGame;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import dataaccess.DataAccessException;
+import org.junit.jupiter.api.*;
 import server.Server;
+import client.*;
+import ui.ServerFacade;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ServerFacadeTests {
 
     private static Server server;
+    private ServerFacade serverFacade;
+    private static int port;
 
     @BeforeAll
     public static void init() {
         server = new Server();
-        var port = server.run(0);
+        port = server.run(0);
         System.out.println("Started test HTTP server on " + port);
     }
 
     @AfterAll
     static void stopServer() {
         server.stop();
+    }
+
+
+    @BeforeEach
+    public void setup() throws DataAccessException {
+        serverFacade = new ServerFacade(Integer.toString(port));
+        server.clear();
     }
 
 
