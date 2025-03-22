@@ -1,5 +1,7 @@
 package ui;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -41,5 +43,27 @@ public class PreloginUI {
                     System.out.println("Unknown command. Type 'help' for available commands.");
                     break;
             }
+        }
+    }
+
+    private void updateGames() throws Exception {
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(client.getServerFacade().listGames(authToken), JsonObject.class);
+
+        JsonArray gamesArray = jsonObject.getAsJsonArray("games");
+
+        // Reset game list map
+        gameList.clear();
+        gameNames.clear();
+
+        for (int i = 0; i < gamesArray.size(); i++) {
+            JsonObject game = gamesArray.get(i).getAsJsonObject();
+
+            // Extract and print game properties
+            int gameID = game.get("gameID").getAsInt();
+            String gameName = game.get("gameName").getAsString();
+
+            gameList.put(gameName, gameID);
+            gameNames.add(gameName);
         }
     }
