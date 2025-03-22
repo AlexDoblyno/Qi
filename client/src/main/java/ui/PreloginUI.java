@@ -77,3 +77,20 @@ public class PreloginUI {
         System.out.println("play game    - Joins a game as a player.");
         System.out.println("observe game - Observes a game.");
     }
+    private void handleLogout() {
+        try {
+            String response = client.getServerFacade().logout(authToken);
+            if (response.isEmpty()) {
+                System.out.println("Logout successful. Returning to login screen.");
+                new PreloginUI(client).start();
+            } else {
+                System.out.println("Logout failed. Please try again.");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred during logout: " + e.getMessage());
+        }
+    }
+
+    private void handleCreateGame() {
+        System.out.print("Enter a name for the new game: ");
+        String gameName = scanner.nextLine();
