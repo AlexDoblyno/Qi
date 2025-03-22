@@ -51,3 +51,53 @@ public class PreloginUI {
         System.out.println("login     - Logs in an existing user.");
         System.out.println("register  - Registers a new user account and logs in.");
     }
+    private void handleLogin() {
+        System.out.print("Enter username: ");
+        String username = scanner.nextLine();
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+
+        try {
+            String response = client.getServerFacade().login(username, password);
+
+            if (response.contains("authToken")) {
+                System.out.println("Login successful!");
+                JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+                authToken = jsonObject.get("authToken").getAsString();
+
+                // Transition to the post-login UI
+                new PostloginUI(client, authToken).start();
+            } else {
+                System.out.println("Login failed. Please check your username and password.");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred during login: " + e.getMessage());
+        }
+    }
+
+    private void handleRegister() {
+        System.out.print("Enter new username: ");
+        String username = scanner.nextLine();
+        System.out.print("Enter new password: ");
+        String password = scanner.nextLine();
+        System.out.print("Enter new email: ");
+        String email = scanner.nextLine();
+
+        try {
+            String response = client.getServerFacade().registerUser(username, password, email);
+
+            if (response.contains("authToken")) {
+                System.out.println("Registration successful!");
+                JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+                authToken = jsonObject.get("authToken").getAsString();
+
+                // Transition to the post-login UI
+                new PostloginUI(client, authToken).start();
+            } else {
+                System.out.println("Registration failed. Username might already be taken.");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred during registration: " + e.getMessage());
+        }
+    }
+}
