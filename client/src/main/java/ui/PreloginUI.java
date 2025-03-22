@@ -94,3 +94,21 @@ public class PreloginUI {
     private void handleCreateGame() {
         System.out.print("Enter a name for the new game: ");
         String gameName = scanner.nextLine();
+
+
+        try {
+            String response = client.getServerFacade().createGame(gameName, authToken);
+            if (response.contains("gameID")) {
+                JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+            } else {
+                System.out.println("Failed to create game. Please try again.");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred while creating the game: " + e.getMessage());
+        }
+        try {
+            updateGames();
+        } catch (Exception e) {
+            System.out.println("Error getting games from server: " + e.getMessage());
+        }
+    }
