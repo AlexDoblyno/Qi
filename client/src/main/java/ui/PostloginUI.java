@@ -84,6 +84,7 @@ public class PostloginUI {
             gameNames.add(gameName);
         }
     }
+
     private void displayHelp() {
         System.out.println("Available commands:");
         System.out.println("help         - Displays this help message.");
@@ -177,3 +178,49 @@ public class PostloginUI {
             System.out.println("An error occurred while listing games: " + e.getMessage());
         }
     }
+
+    private void handlePlayGame() {
+        System.out.print("Enter the number of the game you want to join: ");
+        int gameNumber = Integer.parseInt(scanner.nextLine());
+
+        if (gameNames.size() < gameNumber || gameNumber < 1) {
+            System.out.println("Invalid game number. Please list games and try again.");
+            return;
+        }
+
+        System.out.print("Enter your color (e.g., 'white' or 'black'): ");
+        ChessGame.TeamColor color = (Objects.equals(scanner.nextLine(), "white")) ? ChessGame.TeamColor.WHITE :
+                ChessGame.TeamColor.BLACK;
+
+        try {
+            String response = client.getServerFacade().playGame(String.valueOf(gameNumber), color, authToken);
+            if (response.isEmpty()) {  // Adjust based on actual server response
+                System.out.println("Joined game successfully.");
+
+                // Transition to GameUI for gameplay
+                new GameUI(client, gameList.get(gameNames.get(gameNumber-1)), color, authToken).start();
+            } else {
+                System.out.println("Failed to join game. Please try another.");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred while joining the game: " + e.getMessage());
+        }
+    }
+
+
+    private void handleObserveGame() {
+        System.out.print("Enter the number of the game you want to join: ");
+        int gameNumber = Integer.parseInt(scanner.nextLine());
+
+        if (gameNames.size() < gameNumber || gameNumber < 1) {
+            System.out.println("Invalid game number. Please list games and try again.");
+            return;
+        }
+
+        try {
+            new GameUI(client, gameList.get(gameNames.get(gameNumber-1)), null, authToken).start();
+        } catch (Exception e) {
+            System.out.println("An error occurred while attempting to observe the game: " + e.getMessage());
+        }
+    }
+}
