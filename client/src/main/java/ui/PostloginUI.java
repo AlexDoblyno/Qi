@@ -212,3 +212,15 @@ public class PostloginUI {
         System.out.print("Enter the number of the game you want to join: ");
         int gameNumber = Integer.parseInt(scanner.nextLine());
 
+        if (gameNames.size() < gameNumber || gameNumber < 1) {
+            System.out.println("Invalid game number. Please list games and try again.");
+            return;
+        }
+
+        try {
+            new GameUI(client, gameList.get(gameNames.get(gameNumber-1)), null, authToken).start();
+        } catch (Exception e) {
+            System.out.println("An error occurred while attempting to observe the game: " + e.getMessage());
+        }
+    }
+}
