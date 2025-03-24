@@ -199,4 +199,37 @@ public class GameUI {
         }
     }
 
+    private void highlightLegalMoves() {
+        System.out.print("Enter the position of the piece to highlight (e.g., e2): ");
+        ChessPosition position = parsePosition(scanner.nextLine().trim());
+        if (position != null) {
+            ChessGame.TeamColor bottom = (color == null) ? ChessGame.TeamColor.WHITE : color;
+            BoardPrinter.printHighlightedMoves(chessGame.getBoard(), bottom, chessGame.validMoves(position));
+        } else {
+            System.out.println("Invalid position");
+        }
+    }
 
+    private ChessPosition parsePosition(String input) {
+        if (input.length() == 2) {
+            int col = input.charAt(0) - 'a' + 1;
+            int row = input.charAt(1) - '1' + 1;
+            if (col > 0 && col < 9 && row > 0 && row < 9) {
+                return new ChessPosition(row, col);
+            } else {
+                System.out.println("Position must be in format [a-h][1-8].");
+                return null;
+            }
+        } else {
+            System.out.println("Position must be in format [a-h][1-8].");
+            return null;
+        }
+    }
+
+    public void loadGame(ChessGame game) {
+        this.chessGame = game;
+        ChessGame.TeamColor bottom = (color == null) ? ChessGame.TeamColor.WHITE : color;
+        BoardPrinter.printBoard(chessGame.getBoard(), bottom, null);
+        System.out.println("The game has been updated.");
+    }
+}
