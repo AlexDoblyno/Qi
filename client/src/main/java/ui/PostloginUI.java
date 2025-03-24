@@ -217,3 +217,10 @@ public class PostloginUI {
             return;
         }
 
+        try {
+            new GameUI(client, gameList.get(gameNames.get(gameNumber-1)), null, authToken).start();
+        } catch (Exception e) {
+            System.out.println("An error occurred while attempting to observe the game: " + e.getMessage());
+        }
+    }
+}
