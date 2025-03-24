@@ -207,3 +207,13 @@ public class PostloginUI {
         }
     }
 
+
+    private void handleObserveGame() {
+        System.out.print("Enter the number of the game you want to join: ");
+        int gameNumber = Integer.parseInt(scanner.nextLine());
+
+        if (gameNames.size() < gameNumber || gameNumber < 1) {
+            System.out.println("Invalid game number. Please list games and try again.");
+            return;
+        }
+
