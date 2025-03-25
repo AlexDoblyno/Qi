@@ -35,16 +35,95 @@ public class ServerFacadeTests {
         server.clear();
     }
 
-
+    // Test for playGame with a successful response
     @Test
-    public void sampleTest() {
-        assertTrue(true);
+    public void testPlayGameSuccess() throws Exception {
+        JsonObject jsonObject = JsonParser.parseString(serverFacade.registerUser("sam", "sam", "sam")).getAsJsonObject();
+        String authToken = jsonObject.get("authToken").getAsString();
+        serverFacade.createGame("new", authToken);
+        Assertions.assertTrue(serverFacade.playGame("1", ChessGame.TeamColor.BLACK, authToken).isEmpty());
     }
+
+    // Test for playGame with an invalid game ID
+    @Test
+    public void testPlayGameInvalidGameID() throws Exception {
+        JsonObject jsonObject = JsonParser.parseString(serverFacade.registerUser("sam", "sam", "sam")).getAsJsonObject();
+        String authToken = jsonObject.get("authToken").getAsString();
+        Assertions.assertFalse(serverFacade.playGame("1", ChessGame.TeamColor.BLACK, authToken).isEmpty());
+    }
+
+    // Test for createGame with a successful response
+    @Test
+    public void testCreateGameSuccess() throws Exception {
+        JsonObject jsonObject = JsonParser.parseString(serverFacade.registerUser("sam", "sam", "sam")).getAsJsonObject();
+        String authToken = jsonObject.get("authToken").getAsString();
+        Assertions.assertTrue(serverFacade.createGame("new", authToken).contains("gameID"));
+    }
+
+    // Test for createGame with an invalid auth token
+    @Test
+    public void testCreateGameInvalidAuthToken() throws Exception {
+        Assertions.assertFalse(serverFacade.createGame("new", "authToken").contains("gameID"));
+    }
+
+    // Test for listGames with a successful response
+    @Test
+    public void testListGamesSuccess() throws Exception {
+        JsonObject jsonObject = JsonParser.parseString(serverFacade.registerUser("sam", "sam", "sam")).getAsJsonObject();
+        String authToken = jsonObject.get("authToken").getAsString();
+        serverFacade.createGame("newGame", authToken);
+        Assertions.assertTrue(serverFacade.listGames(authToken).contains("newGame"));
+    }
+
+    // Test for listGames with an invalid auth token
+    @Test
+    public void testListGamesInvalidAuthToken() throws Exception {
+        serverFacade.createGame("newGame", "authToken");
+        Assertions.assertFalse(serverFacade.listGames("authToken").contains("newGame"));
+    }
+
+    // Test for logout with a successful response
+    @Test
+    public void testLogoutSuccess() throws Exception {
+        JsonObject jsonObject = JsonParser.parseString(serverFacade.registerUser("sam", "sam", "sam")).getAsJsonObject();
+        String authToken = jsonObject.get("authToken").getAsString();
+        Assertions.assertTrue(serverFacade.logout(authToken).isEmpty());
+    }
+
+    // Test for logout with an invalid auth token
+    @Test
+    public void testLogoutInvalidAuthToken() throws Exception {
+        Assertions.assertFalse(serverFacade.logout("authToken").isEmpty());
+    }
+
+    // Test for registerUser with a successful response
+    @Test
+    public void testRegisterUserSuccess() throws Exception {
+        Assertions.assertTrue(serverFacade.registerUser("sam", "sam", "sam").contains("authToken"));
+    }
+
+    // Test for registerUser with missing fields
+    @Test
+    public void testRegisterUserTwice() throws Exception {
+        serverFacade.registerUser("sam", "sam", "sam");
+        Assertions.assertFalse(serverFacade.registerUser("sam", "sam", "sam").contains("authToken"));
+    }
+
+    // Test for login with a successful response
+    @Test
+    public void testLoginSuccess() throws Exception {
+        String authToken = serverFacade.registerUser("sam", "sam", "sam");
+        serverFacade.logout(authToken);
+        Assertions.assertTrue(serverFacade.login("sam", "sam").contains("authToken"));
+    }
+
+    // Test for login with invalid credentials
+    @Test
+    public void testLoginInvalidCredentials() throws Exception {
+        Assertions.assertFalse(serverFacade.login("sam", "sam").contains("authToken"));
+    }
+
 }
-/// 需要改动和审阅
-@Test
-void register() throws Exception {
-    var authData = facade.register("player1", "password", "p1@email.com");
-    assertTrue(authData.authToken().length() > 10);
-}
+
+
 ///回来赶紧看看，不要急 “然后，您可以直接使用如下单元测试示例中所示的测试来测试您的外观register。”
