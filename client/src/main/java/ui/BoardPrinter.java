@@ -46,7 +46,7 @@ public class BoardPrinter {
                             EscapeSequences.SET_BG_COLOR_LIGHT_GREY;
                     if (highlight != null && highlight.contains(new ChessPosition(i+1, j+1))) {
                         backgroundColor = (j % 2 != 0) ? EscapeSequences.SET_BG_COLOR_DARK_GREEN :
-                                EscapeSequences.SET_BG_COLOR_GREEN;
+                            EscapeSequences.SET_BG_COLOR_GREEN;
                     }
                     System.out.print(backgroundColor + getPieceString(board.getPiece(new ChessPosition(i+1, j+1))));
                 }
@@ -100,4 +100,3 @@ public class BoardPrinter {
         }
     }
 }
-

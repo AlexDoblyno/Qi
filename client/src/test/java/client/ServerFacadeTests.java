@@ -124,6 +124,3 @@ public class ServerFacadeTests {
     }
 
 }
-
-
-///回来赶紧看看，不要急 “然后，您可以直接使用如下单元测试示例中所示的测试来测试您的外观register。”
