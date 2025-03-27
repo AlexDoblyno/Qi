@@ -4,21 +4,15 @@ import dataaccess.AuthDAO;
 import dataaccess.DataAccessException;
 import dataaccess.GameDAO;
 import dataaccess.UserDAO;
+import model.ClearResult;
 
-public class ClearService {
-    private static GameDAO gameDAO;
-    private static AuthDAO authDAO;
-    private static UserDAO userDAO;
+public class ClearService implements Service {
 
-    public ClearService(GameDAO gameDAO, AuthDAO authDAO, UserDAO userDAO) {
-        this.gameDAO = gameDAO;
-        this.authDAO = authDAO;
-        this.userDAO = userDAO;
-    }
+    public ClearResult clear() throws DataAccessException {
+        GameDAO.clear();
+        UserDAO.clear();
+        AuthDAO.clear();
 
-    public void clear() throws DataAccessException {
-        gameDAO.clear();
-        authDAO.clear();
-        userDAO.clear();
+        return new ClearResult();
     }
 }
