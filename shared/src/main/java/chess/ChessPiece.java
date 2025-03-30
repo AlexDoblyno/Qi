@@ -1,7 +1,5 @@
 package chess;
 
-import chess.moves.*;
-
 import java.util.Collection;
 import java.util.Objects;
 
@@ -14,53 +12,18 @@ import java.util.Objects;
 public class ChessPiece {
 
     private final ChessGame.TeamColor pieceColor;
-    private PieceType pieceType;
-    private boolean subjectToEnPassant;
-    private boolean moved;
+    private final PieceType type;
 
-    public ChessPiece(ChessGame.TeamColor pieceColor, PieceType type) {
+    public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
         this.pieceColor = pieceColor;
-        this.pieceType = type;
-        this.subjectToEnPassant = false;
-        this.moved = false;
-    }
-
-    /**
-     * Constructs new ChessPiece as copy of original
-     *
-     * @param original Piece to copy
-     */
-    public ChessPiece(ChessPiece original) {
-        this.pieceColor = original.pieceColor;
-        this.pieceType = original.pieceType;
-        this.subjectToEnPassant = original.subjectToEnPassant;
-        this.moved = original.moved;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ChessPiece that = (ChessPiece) o;
-        return pieceColor == that.pieceColor && pieceType == that.pieceType;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(pieceColor, pieceType);
+        this.type = type;
     }
 
     /**
      * The various different chess piece options
      */
     public enum PieceType {
-        KING,
-        QUEEN,
-        BISHOP,
-        KNIGHT,
-        ROOK,
-        PAWN
+        KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN
     }
 
     /**
@@ -74,46 +37,7 @@ public class ChessPiece {
      * @return which type of chess piece this piece is
      */
     public PieceType getPieceType() {
-        return pieceType;
-    }
-
-    /**
-     * Sets pieceType
-     *
-     * @param type Type to set to
-     */
-    public void setPieceType(ChessPiece.PieceType type) {
-        pieceType = type;
-    }
-
-    /**
-     * Sets subjectToEnPassant to given value
-     *
-     * @param set Value to set subjectToEnPassant to
-     */
-    public void setSubjectToEnPassant(boolean set) {
-        subjectToEnPassant = set;
-    }
-
-    /**
-     * @return True if subjectToEnPassant is set
-     */
-    public boolean getSubjectToEnPassant() {
-        return subjectToEnPassant;
-    }
-
-    /**
-     * Sets moved to true
-     */
-    public void setMoved() {
-        moved = true;
-    }
-
-    /**
-     * @return True if moved is not set
-     */
-    public boolean getNotMoved() {
-        return !moved;
+        return type;
     }
 
     /**
@@ -124,34 +48,44 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        Collection<ChessMove> validMoves;
-        switch (pieceType) {
-            case KING -> {
-                PieceMovesCalculator calculator = new KingCalculator();
-                validMoves = calculator.pieceMoves(board, myPosition);
+        return MovesCalculator.calculateMoves(board, myPosition);
+    }
+
+    public Boolean canKillKing(ChessBoard board, ChessPosition myPosition) {
+        Collection<ChessMove> moves = pieceMoves(board, myPosition);
+        for (ChessMove move : moves) {
+            if (board.getPiece(move.getEndPosition()) != null && board.getPiece(
+                    move.getEndPosition()).type == PieceType.KING) {
+                return true;
             }
-            case QUEEN -> {
-                PieceMovesCalculator calculator = new QueenCalculator();
-                validMoves = calculator.pieceMoves(board, myPosition);
-            }
-            case BISHOP -> {
-                PieceMovesCalculator calculator = new BishopCalculator();
-                validMoves = calculator.pieceMoves(board, myPosition);
-            }
-            case KNIGHT -> {
-                PieceMovesCalculator calculator = new KnightCalculator();
-                validMoves = calculator.pieceMoves(board, myPosition);
-            }
-            case ROOK -> {
-                PieceMovesCalculator calculator = new RookCalculator();
-                validMoves = calculator.pieceMoves(board, myPosition);
-            }
-            case PAWN -> {
-                PieceMovesCalculator calculator = new PawnCalculator();
-                validMoves = calculator.pieceMoves(board, myPosition);
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + pieceType);
         }
-        return validMoves;
+        return false;
+    }
+
+    public Boolean canKillPiece(ChessBoard board, ChessPosition myPosition, ChessPosition piecePosition) {
+        Collection<ChessMove> moves = pieceMoves(board, myPosition);
+        for (ChessMove move : moves) {
+            if (move.getEndPosition().equals(piecePosition)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ChessPiece that = (ChessPiece) o;
+        return pieceColor == that.pieceColor && type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pieceColor, type);
     }
 }
