@@ -1,24 +1,84 @@
 package dataaccess;
 
-import chess.*;
+import com.google.gson.Gson;
 import model.GameData;
 
-import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public interface GameDAO {
-    void clear() throws DataAccessException;
 
-    Integer createGame(String gameName) throws DataAccessException;
+    static void clear() throws DataAccessException {
+        var statement = "TRUNCATE TABLE game";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var preparedStatement = conn.prepareStatement(statement)) {
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+    }
 
-    GameData getGame(Integer gameID) throws DataAccessException;
+    static void createGame(GameData newGame) throws DataAccessException {
+        var statement = "INSERT INTO game (gameID, gameJSON) VALUES (?, ?)";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var preparedStatement = conn.prepareStatement(statement)) {
+                preparedStatement.setInt(1, newGame.gameID());
+                preparedStatement.setString(2, new Gson().toJson(newGame));
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+    }
 
-    List<GameData> listGames() throws DataAccessException;
+    static GameData getGame(int gameID) throws DataAccessException {
+        var statement = "SELECT gameID, gameJSON FROM game WHERE gameID=?";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var ps = conn.prepareStatement(statement)) {
+                ps.setInt(1, gameID);
+                try (var rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return new Gson().fromJson(rs.getString("gameJSON"),
+                                GameData.class);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+        return null;
+    }
 
-    void updateGame(ChessGame.TeamColor playerColor, Integer gameID, String username) throws DataAccessException;
+    static Collection<GameData> listGames() throws DataAccessException {
+        var result = new ArrayList<GameData>();
+        try (var conn = DatabaseManager.getConnection()) {
+            var statement = "SELECT gameJSON FROM game";
+            try (var ps = conn.prepareStatement(statement)) {
+                try (var rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        result.add(new Gson().fromJson(
+                                rs.getString("gameJSON"), GameData.class));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+        return result;
+    }
 
-    void updateChessGame(ChessGame game, Integer gameID) throws DataAccessException;
-
-    Integer getSize() throws DataAccessException;
-
-    public Boolean verifyGame(Integer gameID) throws DataAccessException;
+    static void updateGame(GameData updatedGame) throws DataAccessException {
+        var statement = "UPDATE game SET gameJSON=? WHERE gameID=?";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var preparedStatement = conn.prepareStatement(statement)) {
+                preparedStatement.setString(1, new Gson().toJson(updatedGame));
+                preparedStatement.setInt(2, updatedGame.gameID());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+    }
 }

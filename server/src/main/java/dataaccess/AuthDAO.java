@@ -1,15 +1,62 @@
 package dataaccess;
 
+import model.AuthData;
+
+import java.sql.SQLException;
+
 public interface AuthDAO {
-    void clear() throws DataAccessException;
 
-    public String getUsername(String authToken) throws DataAccessException;
+    static void clear() throws DataAccessException {
+        var statement = "TRUNCATE TABLE auth";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var preparedStatement = conn.prepareStatement(statement)) {
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+    }
 
-    String createAuthToken(String username) throws DataAccessException;
+    static void createAuth(AuthData newAuth) throws DataAccessException {
+        var statement = "INSERT INTO auth (authToken, username) VALUES (?, ?)";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var preparedStatement = conn.prepareStatement(statement)) {
+                preparedStatement.setString(1, newAuth.authToken());
+                preparedStatement.setString(2, newAuth.username());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+    }
 
-    void deleteAuthToken(String authToken) throws DataAccessException;
+    static AuthData getAuth(String authToken) throws DataAccessException {
+        var statement = "SELECT authToken, username FROM auth WHERE authToken=?";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var ps = conn.prepareStatement(statement)) {
+                ps.setString(1, authToken);
+                try (var rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return new AuthData(rs.getString("authToken"),
+                                rs.getString("username"));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(String.format(e.getMessage()));
+        }
+        return null;
+    }
 
-    Integer getSize() throws DataAccessException;
-
-    public Boolean verifyAuthToken(String authToken) throws DataAccessException;
+    static void deleteAuth(String authToken) throws DataAccessException {
+        var statement = "DELETE FROM auth WHERE authToken=?";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var preparedStatement = conn.prepareStatement(statement)) {
+                preparedStatement.setString(1, authToken);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+    }
 }
