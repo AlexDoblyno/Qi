@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public interface AuthDAO {
 
     static void clear() throws DataAccessException {
-        var statement = "TRUNCATE TABLE auth";
+        var statement = "TURNCATE TABLE auth";
         try (var conn = DatabaseManager.getConnection()) {
             try (var preparedStatement = conn.prepareStatement(statement)) {
                 preparedStatement.executeUpdate();
