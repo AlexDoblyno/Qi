@@ -4,10 +4,76 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="542f0c6c-1f06-4c14-9e44-c1a3151aef89" name="更改" comment="Add ServerFacadeTests, 更多文件等待implement，逐步测试，记得查看facadetest红字">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/client/ServerFacade.java" afterDir="false" />
+    <list default="true" id="542f0c6c-1f06-4c14-9e44-c1a3151aef89" name="更改" comment="调整ClientDAO以及核对ServerFacadeTest，记得查看share部分">
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/ResponseExceptionHandler/ResponseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/model/AuthData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/model/ModelDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/requestclasses/ClearDBRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/requestclasses/CreateGameRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/requestclasses/JoinGameRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/requestclasses/ListGamesRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/requestclasses/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/requestclasses/LogoutRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/requestclasses/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/requestclasses/Request.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/resultclasses/ClearDBResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/resultclasses/CreateGameResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/resultclasses/JoinGameResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/resultclasses/ListGamesResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/resultclasses/LoginResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/resultclasses/LogoutResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/resultclasses/RegisterResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/resultclasses/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/serverfacade/ServerFacade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/servermessages/ErrorMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/servermessages/LoadGameMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/servermessages/NotificationMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/servermessages/ServerMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/usercommands/JoinPlayerCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/usercommands/JoinSpectatorCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/usercommands/LeaveCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/usercommands/MoveCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/usercommands/ResignCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/websocketmessages/usercommands/UserGameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/client/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/client/WSFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/CommandLineUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/CommandLineUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GJoinHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GJoinHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GLeaveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GLeaveHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GMoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GMoveHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GResignHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GResignHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GSpectateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GSpectateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/GameHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/OnlineGameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/GameplayHandlers/OnlineGameHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/GameplayUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/GameplayUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/JoinHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/JoinHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/ListHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/ListHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/LoginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/RegisterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/RegisterHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/SpectateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/SpectateHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/test/java/ServerFacadeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/test/java/ServerFacadeTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/AuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/AuthDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/target/classes/dataaccess/AuthDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/target/classes/dataaccess/GameDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/target/classes/model/ListResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/target/classes/service/GameService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/target/classes/service/Service.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/target/classes/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPiece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/model/GameData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/model/GamesList.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/model/GamesList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/target/classes/chess/ChessBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/shared/target/classes/chess/ChessBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/target/classes/chess/ChessGame$TeamColor.class" beforeDir="false" afterPath="$PROJECT_DIR$/shared/target/classes/chess/ChessGame$TeamColor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/target/classes/chess/ChessGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/shared/target/classes/chess/ChessGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/target/classes/chess/ChessPiece$PieceType.class" beforeDir="false" afterPath="$PROJECT_DIR$/shared/target/classes/chess/ChessPiece$PieceType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/target/classes/chess/ChessPiece.class" beforeDir="false" afterPath="$PROJECT_DIR$/shared/target/classes/chess/ChessPiece.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/target/classes/model/AuthData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/target/classes/model/GameData.class" beforeDir="false" afterPath="$PROJECT_DIR$/shared/target/classes/model/GameData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/target/classes/model/UserData.class" beforeDir="false" afterPath="$PROJECT_DIR$/shared/target/classes/model/UserData.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +83,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Exception" />
         <option value="Class" />
       </list>
     </option>
@@ -50,12 +117,13 @@
     "JUnit.ServerFacadeTests.executor": "Run",
     "JUnit.client中的ui.executor": "Run",
     "JUnit.server中的handler.executor": "Run",
-    "JUnit.shared中的passoff.chess.executor": "Run",
+    "JUnit.shared中的passoff.chess.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/IntelliJ/ChessNew",
+    "last_directory_selection": "E:/IntelliJ/ChessNew/client/src/main/java/client",
+    "last_opened_file_path": "E:/IntelliJ/ChessNew/client/src/main/java",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,7 +132,18 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.shared中的passoff.chess">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IntelliJ\ChessNew\client\src\main\java" />
+      <recent name="E:\IntelliJ\ChessNew\shared\src\main\java" />
+      <recent name="E:\IntelliJ\ChessNew\client\src\main\java\ui" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="model" />
+      <recent name="ui" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.ServerFacadeTests">
     <configuration name="ServerFacadeTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="client" />
       <extension name="coverage">
@@ -124,8 +203,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.shared中的passoff.chess" />
         <item itemvalue="JUnit.ServerFacadeTests" />
+        <item itemvalue="JUnit.shared中的passoff.chess" />
         <item itemvalue="JUnit.server中的handler" />
         <item itemvalue="JUnit.client中的ui" />
       </list>
@@ -152,7 +231,7 @@
       <workItem from="1744063941942" duration="4889000" />
       <workItem from="1744705124676" duration="947000" />
       <workItem from="1744748832259" duration="13000" />
-      <workItem from="1744748893925" duration="2848000" />
+      <workItem from="1744748893925" duration="15227000" />
     </task>
     <task id="LOCAL-00001" summary="Changes">
       <option name="closed" value="true" />
@@ -202,15 +281,35 @@
       <option name="project" value="LOCAL" />
       <updated>1744749703525</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="调整ClientDAO以及核对ServerFacadeTest，记得查看share部分">
+      <option name="closed" value="true" />
+      <created>1744759006873</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744759006873</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes" />
     <MESSAGE value="Add ServerFacadeTests, 更多文件等待implement，逐步测试，记得查看facadetest红字" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add ServerFacadeTests, 更多文件等待implement，逐步测试，记得查看facadetest红字" />
+    <MESSAGE value="调整ClientDAO以及核对ServerFacadeTest，记得查看share部分" />
+    <option name="LAST_COMMIT_MESSAGE" value="调整ClientDAO以及核对ServerFacadeTest，记得查看share部分" />
   </component>
 </project>

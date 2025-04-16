@@ -1,7 +1,7 @@
 package ui.GameplayHandlers;
 
 import model.AuthToken;
-import wsfacade.WSFacade;
+import client.WSFacade;
 
 public class OnlineGameHandler extends GameHandler {
     protected final WSFacade wsFacade;

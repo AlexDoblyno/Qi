@@ -1,6 +1,6 @@
 package ui.uihandlers;
 
-import exceptions.ResponseException;
+import ResponseExceptionHandler.ResponseException;
 import model.AuthToken;
 import resultclasses.RegisterResult;
 import serverfacade.ServerFacade;

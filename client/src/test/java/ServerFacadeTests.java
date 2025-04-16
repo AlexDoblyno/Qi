@@ -1,6 +1,6 @@
 package client;
 
-import exceptions.ResponseException;
+import ResponseExceptionHandler.ResponseException;
 import resultclasses.CreateGameResult;
 import resultclasses.LoginResult;
 import resultclasses.RegisterResult;

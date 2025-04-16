@@ -1,6 +1,6 @@
 package ui.uihandlers;
 
-import exceptions.ResponseException;
+import ResponseExceptionHandler.ResponseException;
 import resultclasses.LoginResult;
 import serverfacade.ServerFacade;
 import ui.Printer;

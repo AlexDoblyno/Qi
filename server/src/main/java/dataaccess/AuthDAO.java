@@ -21,8 +21,8 @@ public interface AuthDAO {
         var statement = "INSERT INTO auth (authToken, username) VALUES (?, ?)";
         try (var conn = DatabaseManager.getConnection()) {
             try (var preparedStatement = conn.prepareStatement(statement)) {
-                preparedStatement.setString(1, newAuth.authToken());
-                preparedStatement.setString(2, newAuth.username());
+                preparedStatement.setString(1, newAuth.getToken());
+                preparedStatement.setString(2, newAuth.getUsername());
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {

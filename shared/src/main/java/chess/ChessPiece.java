@@ -1,7 +1,9 @@
 package chess;
 
 import chess.moves.*;
+import com.google.gson.*;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -107,6 +109,14 @@ public class ChessPiece {
      */
     public void setMoved() {
         moved = true;
+    }
+
+    public static class ChessPieceJson implements JsonDeserializer<ChessPiece> {
+
+        @Override
+        public ChessPiece deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            return new Gson().fromJson(jsonElement, ChessPiece.class);
+        }
     }
 
     /**

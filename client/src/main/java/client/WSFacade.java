@@ -1,6 +1,6 @@
-package ServerFacade;
+package client;
 
-import exceptions.ResponseException;
+import ResponseExceptionHandler.ResponseException;
 import model.AuthToken;
 import chess.ChessGame;
 import chess.ChessMove;
@@ -8,23 +8,22 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ui.GameplayHandlers.GameHandler;
 import websocketmessages.usercommands.JoinPlayerCommand;
-import websocketmessages.usercommands.JoinSpectatorCommand;
 
 import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class ServerFacade extends Endpoint {
+public class WSFacade extends Endpoint {
 
     // Session
     private final Session session;
 
     private final GameHandler gameHandler;
 
-    private final Gson gson = new GsonBuilder().registerTypeAdapter(ChessGame.class, new ChessGame.ChessGameTA()).create();
+    private final Gson gson = new GsonBuilder().registerTypeAdapter(ChessGame.class, new ChessGame.ChessGameJson()).create();
 
-    public ServerFacade(String url, GameHandler gameHandler) throws ResponseException {
+    public WSFacade(String url, GameHandler gameHandler) throws ResponseException {
         try {
             url = url.replace("http", "ws");
             URI socketURI = new URI(url + "/connect");

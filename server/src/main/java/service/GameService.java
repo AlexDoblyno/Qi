@@ -4,6 +4,7 @@ import chess.ChessGame;
 import dataaccess.DataAccessException;
 import model.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -27,6 +28,7 @@ public class GameService implements Service {
                 if (game == null) {
                     game = new GameData(gameID,
                             null, null,
+                            new HashSet<>(),
                             createRequest.gameName(),
                             new ChessGame());
                     createGame(game);
@@ -53,24 +55,24 @@ public class GameService implements Service {
             GameData game = getGame(joinRequest.gameID());
             if (game != null) {
                 if (joinRequest.playerColor().equals("WHITE")) {
-                    if (game.whiteUsername() == null) {
-                        updateGame(new GameData(game.gameID(),
-                                auth.username(),
-                                game.blackUsername(),
-                                game.gameName(),
-                                game.game()));
+                    if (game.getWhiteUsername() == null) {
+                        updateGame(new GameData(game.getGameID(),
+                                auth.getUsername(),
+                                game.getBlackUsername(),
+                                game.getGameName(),
+                                game.getGame()));
 
                         return new JoinResult();
                     } else {
                         throw new UnavailableException("Already Taken");
                     }
                 } else if (joinRequest.playerColor().equals("BLACK")) {
-                    if (game.blackUsername() == null) {
-                        updateGame(new GameData(game.gameID(),
-                                game.whiteUsername(),
-                                auth.username(),
-                                game.gameName(),
-                                game.game()));
+                    if (game.getBlackUsername() == null) {
+                        updateGame(new GameData(game.getGameID(),
+                                game.getWhiteUsername(),
+                                auth.getUsername(),
+                                game.getGameName(),
+                                game.getGame()));
 
                         return new JoinResult();
                     } else {

@@ -24,7 +24,7 @@ public interface GameDAO {
         var statement = "INSERT INTO game (gameID, gameJSON) VALUES (?, ?)";
         try (var conn = DatabaseManager.getConnection()) {
             try (var preparedStatement = conn.prepareStatement(statement)) {
-                preparedStatement.setInt(1, newGame.gameID());
+                preparedStatement.setInt(1, newGame.getGameID());
                 preparedStatement.setString(2, new Gson().toJson(newGame));
                 preparedStatement.executeUpdate();
             }
@@ -74,7 +74,7 @@ public interface GameDAO {
         try (var conn = DatabaseManager.getConnection()) {
             try (var preparedStatement = conn.prepareStatement(statement)) {
                 preparedStatement.setString(1, new Gson().toJson(updatedGame));
-                preparedStatement.setInt(2, updatedGame.gameID());
+                preparedStatement.setInt(2, updatedGame.getGameID());
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {

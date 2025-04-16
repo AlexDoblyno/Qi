@@ -1,5 +1,8 @@
 package chess;
 
+import com.google.gson.*;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -45,7 +48,8 @@ public class ChessGame {
      */
     public enum TeamColor {
         WHITE,
-        BLACK
+        BLACK,
+        DONE
     }
 
     /**
@@ -277,5 +281,16 @@ public class ChessGame {
      */
     public ChessBoard getBoard() {
         return board;
+    }
+
+    public static class ChessGameJson implements JsonDeserializer<ChessGame> {
+
+        @Override
+        public ChessGame deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            var gson = new GsonBuilder()
+                    .registerTypeAdapter(chess.ChessBoard.class, new ChessBoard.ChessBoardJson())
+                    .create();
+            return gson.fromJson(jsonElement, ChessGame.class);
+        }
     }
 }

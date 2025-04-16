@@ -3,10 +3,10 @@ package ui.GameplayHandlers;
 import chess.ChessMove;
 import chess.ChessPiece;
 import chess.ChessPosition;
-import exceptions.ResponseException;
+import ResponseExceptionHandler.ResponseException;
 import model.AuthToken;
 import ui.Printer;
-import wsfacade.WSFacade;
+import client.WSFacade;
 
 public class GMoveHandler extends OnlineGameHandler {
 

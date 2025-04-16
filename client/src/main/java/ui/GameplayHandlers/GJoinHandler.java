@@ -1,9 +1,9 @@
 package ui.GameplayHandlers;
 
 import chess.ChessGame;
-import exceptions.ResponseException;
+import ResponseExceptionHandler.ResponseException;
 import model.AuthToken;
-import wsfacade.WSFacade;
+import client.WSFacade;
 
 public class GJoinHandler extends OnlineGameHandler {
 

@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ui.ChessBoardPrinter;
 import ui.Printer;
-import websocket.messages.ServerMessage;
+import websocketmessages.servermessages.ServerMessage;
 
 
 public class GameHandler {
@@ -60,7 +60,7 @@ public class GameHandler {
         switch (serverMessage.getServerMessageType()) {
             case LOAD_GAME -> {
                 // Load game
-                var game = new GsonBuilder().registerTypeAdapter(ChessGame.class, new ChessGame.ChessGameTA()).create()
+                var game = new GsonBuilder().registerTypeAdapter(ChessGame.class, new ChessGame.ChessGameJson()).create()
                         .fromJson(message, websocketmessages.servermessages.LoadGameMessage.class);
                 updateGame(game.getGame());
             }

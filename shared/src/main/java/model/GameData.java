@@ -5,17 +5,17 @@ import chess.ChessGame;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Game {
+public class GameData {
 
-    private String gameID;
+    private int gameID;
     private String whiteUsername;
     private String blackUsername;
     private HashSet<String> spectators;
     private String gameName;
     private ChessGame game;
 
-    public Game() {
-        this.gameID = null;
+    public GameData() {
+        this.gameID = Integer.parseInt(null);
         this.whiteUsername = null;
         this.blackUsername = null;
         this.spectators = new HashSet<>();
@@ -23,7 +23,7 @@ public class Game {
         this.game = new ChessGame();
     }
 
-    public Game(String gameID, String whiteUsername, String blackUsername, HashSet<String> spectators, String gameName, ChessGame game) {
+    public GameData(int gameID, String whiteUsername, String blackUsername, HashSet<String> spectators, String gameName, ChessGame game) {
         this.gameID = gameID;
         this.whiteUsername = whiteUsername;
         this.blackUsername = blackUsername;
@@ -32,11 +32,11 @@ public class Game {
         this.game = game;
     }
 
-    public String getGameID() {
+    public int getGameID() {
         return gameID;
     }
 
-    public void setGameID(String gameID) {
+    public void setGameID(int gameID) {
         this.gameID = gameID;
     }
 
@@ -88,7 +88,7 @@ public class Game {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Game game1 = (Game) o;
+        GameData game1 = (GameData) o;
         return Objects.equals(gameID, game1.gameID) && Objects.equals(whiteUsername, game1.whiteUsername) && Objects.equals(blackUsername, game1.blackUsername) && Objects.equals(spectators, game1.spectators) && Objects.equals(gameName, game1.gameName) && Objects.equals(game, game1.game);
     }
 
@@ -98,14 +98,14 @@ public class Game {
     }
 
     public boolean isOver() {
-        return getGame().getTeamTurn() == ChessGame.TeamColor.FINISHED;
+        return getGame().getTeamTurn() == ChessGame.TeamColor.DONE;
     }
 
     /**
      * Sets the game to be over.
      */
     public void setOver() {
-        getGame().setTeamTurn(ChessGame.TeamColor.FINISHED);
+        getGame().setTeamTurn(ChessGame.TeamColor.DONE);
     }
 
     @Override

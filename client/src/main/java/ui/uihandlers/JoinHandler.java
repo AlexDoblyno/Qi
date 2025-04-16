@@ -2,7 +2,7 @@ package ui.uihandlers;
 
 import chess.ChessGame;
 import model.AuthToken;
-import model.Game;
+import model.GameData;
 import resultclasses.JoinGameResult;
 import serverfacade.ServerFacade;
 import ui.Printer;
@@ -15,7 +15,7 @@ public class JoinHandler extends Handler {
         super(serverFacade);
     }
 
-    public JoinGameResult join(String[] args, AuthToken authToken, List<Game> previousList) {
+    public JoinGameResult join(String[] args, AuthToken authToken, List<GameData> previousList) {
         if (args.length < 2) {
             p.reset();
             p.setColor(Printer.Color.RED);
@@ -31,8 +31,8 @@ public class JoinHandler extends Handler {
                 p.println("Error: Invalid game index");
                 return null;
             }
-            Game selectedGame = previousList.get(gameIndex - 1);
-            String gameID = selectedGame.getGameID();
+            GameData selectedGame = previousList.get(gameIndex - 1);
+            int gameID = selectedGame.getGameID();
             if (args.length > 2) {
                 String playerColor = args[2];
                 if (!playerColor.equals("BLACK") && !playerColor.equals("WHITE")) {
@@ -43,7 +43,7 @@ public class JoinHandler extends Handler {
                 }
                 var result = serverFacade.joinGame(authToken, Integer.valueOf(gameID), playerColor);
                 result.setPlayerColor(ChessGame.TeamColor.valueOf(playerColor));
-                result.setGameID(Integer.parseInt(gameID));
+                result.setGameID(gameID);
                 return result;
             } else {
                 boolean whiteAvailable = selectedGame.getWhiteUsername() == null;
@@ -54,7 +54,7 @@ public class JoinHandler extends Handler {
                     p.println("Joining as white");
                     var result = serverFacade.joinGame(authToken, Integer.valueOf(gameID), "WHITE");
                     result.setPlayerColor(ChessGame.TeamColor.WHITE);
-                    result.setGameID(Integer.parseInt(gameID));
+                    result.setGameID(gameID);
                     return result;
                 } else if (blackAvailable) {
                     p.reset();
@@ -63,7 +63,7 @@ public class JoinHandler extends Handler {
 
                     var result = serverFacade.joinGame(authToken, Integer.valueOf(gameID), "BLACK");
                     result.setPlayerColor(ChessGame.TeamColor.BLACK);
-                    result.setGameID(Integer.parseInt(gameID));
+                    result.setGameID(gameID);
                     return result;
                 } else {
                     p.reset();

@@ -1,11 +1,11 @@
 package ui;
 
 import chess.ChessGame;
-import exceptions.ResponseException;
+import ResponseExceptionHandler.ResponseException;
 import model.AuthToken;
 import serverfacade.ServerFacade;
 import ui.GameplayHandlers.*;
-import wsfacade.WSFacade;
+import client.WSFacade;
 
 public class GameplayUI extends GameHandler {
 

@@ -1,5 +1,8 @@
 package chess;
 
+import com.google.gson.*;
+
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -137,6 +140,17 @@ public class ChessBoard {
             success = true;
         }
         return success;
+    }
+
+    public static class ChessBoardJson implements JsonDeserializer<ChessBoard> {
+
+        @Override
+        public ChessBoard deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            var gson = new GsonBuilder()
+                    .registerTypeAdapter(ChessPiece.class, new ChessPiece.ChessPieceJson())
+                    .create();
+            return gson.fromJson(jsonElement, ChessBoard.class);
+        }
     }
 
     /**

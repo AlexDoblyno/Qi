@@ -1,8 +1,8 @@
 package ui.GameplayHandlers;
 
-import exceptions.ResponseException;
+import ResponseExceptionHandler.ResponseException;
 import model.AuthToken;
-import wsfacade.WSFacade;
+import client.WSFacade;
 
 public class GSpectateHandler extends OnlineGameHandler {
 
