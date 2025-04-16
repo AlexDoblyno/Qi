@@ -178,7 +178,7 @@ public class ServiceTests {
         Assertions.assertNotNull(listResult);
         Assertions.assertNotNull(listResult.games());
         Assertions.assertEquals(1, listResult.games().size());
-        Assertions.assertEquals("bm888", listResult.games().getFirst().whiteUsername());
+        Assertions.assertEquals("bm888", listResult.games().getFirst().getWhiteUsername());
     }
 
     @Test

@@ -59,6 +59,7 @@ public class GameService implements Service {
                         updateGame(new GameData(game.getGameID(),
                                 auth.getUsername(),
                                 game.getBlackUsername(),
+                                game.getSpectators(),
                                 game.getGameName(),
                                 game.getGame()));
 
@@ -71,6 +72,7 @@ public class GameService implements Service {
                         updateGame(new GameData(game.getGameID(),
                                 game.getWhiteUsername(),
                                 auth.getUsername(),
+                                game.getSpectators(),
                                 game.getGameName(),
                                 game.getGame()));
 
