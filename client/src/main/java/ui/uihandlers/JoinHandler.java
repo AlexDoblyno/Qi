@@ -2,7 +2,7 @@ package ui.uihandlers;
 
 import chess.ChessGame;
 import model.AuthToken;
-import model.GameData;
+import model.Game;
 import resultclasses.JoinGameResult;
 import serverfacade.ServerFacade;
 import ui.Printer;
@@ -15,7 +15,7 @@ public class JoinHandler extends Handler {
         super(serverFacade);
     }
 
-    public JoinGameResult join(String[] args, AuthToken authToken, List<GameData> previousList) {
+    public JoinGameResult join(String[] args, AuthToken authToken, List<Game> previousList) {
         if (args.length < 2) {
             p.reset();
             p.setColor(Printer.Color.RED);
@@ -31,7 +31,7 @@ public class JoinHandler extends Handler {
                 p.println("Error: Invalid game index");
                 return null;
             }
-            GameData selectedGame = previousList.get(gameIndex - 1);
+            Game selectedGame = previousList.get(gameIndex - 1);
             int gameID = selectedGame.getGameID();
             if (args.length > 2) {
                 String playerColor = args[2];

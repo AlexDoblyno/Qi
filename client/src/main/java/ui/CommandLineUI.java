@@ -1,7 +1,7 @@
 package ui;
 
 import model.AuthToken;
-import model.GameData;
+import model.Game;
 import resultclasses.*;
 import serverfacade.ServerFacade;
 import ui.uihandlers.*;
@@ -31,7 +31,7 @@ public class CommandLineUI {
 
     private AuthToken authToken;
     private String username;
-    private List<GameData> gameList;
+    private List<Game> gameList;
     private State state;
 
     public boolean replLoop(String input) {

@@ -21,7 +21,7 @@ public class UserService implements Service {
         if (getUser(registerRequest.username()) == null) {
             String hashedPassword = BCrypt.hashpw(registerRequest.password(),
                     BCrypt.gensalt());
-            UserData user = new UserData(registerRequest.username(),
+            User user = new User(registerRequest.username(),
                     hashedPassword,
                     registerRequest.email());
             createUser(user);
@@ -44,7 +44,7 @@ public class UserService implements Service {
             throw new BadRequestException("Bad Request");
         }
 
-        UserData user = getUser(loginRequest.username());
+        User user = getUser(loginRequest.username());
         if (user != null) {
             if (BCrypt.checkpw(loginRequest.password(), user.password())) {
                 String authToken = generateToken();

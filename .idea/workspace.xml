@@ -5,21 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="542f0c6c-1f06-4c14-9e44-c1a3151aef89" name="更改" comment="调整ClientDAO以及核对ServerFacadeTest，记得查看share部分">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/AuthSQL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameSQL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/UserSQL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/server/ServerException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/server/bak/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/ClearDBService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/CreateGameService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/JoinGameService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/ListGamesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/LogoutService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/RegisterService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/test/java/ServerFacadeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/test/java/ServerFacadeTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/AuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/AuthDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/DataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/passoff/server/DatabaseTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/passoff/server/DatabaseTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/passoff/server/StandardAPITests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/passoff/server/StandardAPITests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/CommandLineUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/CommandLineUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/JoinHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/JoinHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/ListHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/ListHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/SpectateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/uihandlers/SpectateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/UserSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/UserSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/ListResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/ListResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/dataaccess/DatabaseUnitTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/dataaccess/DatabaseUnitTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/target/classes/service/GameService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/target/classes/service/Service.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/model/GameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/model/GamesList.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/model/GamesList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/model/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/resultclasses/ListGamesResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/resultclasses/ListGamesResult.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +81,7 @@
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "E:/IntelliJ/ChessNew/client/src/main/java/client",
-    "last_opened_file_path": "E:/IntelliJ/ChessNew/server/src/main/java/dataaccess",
+    "last_opened_file_path": "E:/IntelliJ/ChessNew/server/src/main/java/service",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,11 +92,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IntelliJ\ChessNew\server\src\main\java\service" />
       <recent name="E:\IntelliJ\ChessNew\server\src\main\java\dataaccess" />
       <recent name="E:\IntelliJ\ChessNew\server\src\main\java" />
       <recent name="E:\IntelliJ\ChessNew\client\src\main\java" />
       <recent name="E:\IntelliJ\ChessNew\shared\src\main\java" />
-      <recent name="E:\IntelliJ\ChessNew\client\src\main\java\ui" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="dataaccess" />
@@ -198,7 +209,7 @@
       <workItem from="1744705124676" duration="947000" />
       <workItem from="1744748832259" duration="13000" />
       <workItem from="1744748893925" duration="17601000" />
-      <workItem from="1744781359580" duration="7307000" />
+      <workItem from="1744781359580" duration="9514000" />
     </task>
     <task id="LOCAL-00001" summary="Changes">
       <option name="closed" value="true" />
@@ -272,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744781317401</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="调整ClientDAO以及核对ServerFacadeTest，记得查看share部分">
+      <option name="closed" value="true" />
+      <created>1744849327906</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1744849327906</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

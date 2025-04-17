@@ -1,8 +1,6 @@
 package dataaccess;
 
-import model.UserData;
-import dataaccess.DataAccessException;
-import dataaccess.DataAccess;
+import model.User;
 import org.mindrot.jbcrypt.BCrypt;
 import server.ServerException;
 
@@ -32,7 +30,7 @@ public class UserDataSQL extends DataAccess {
         }
     }
 
-    public void addUser(UserData user) throws DataAccessException, ServerException {
+    public void addUser(User user) throws DataAccessException, ServerException {
         try (var conn = DatabaseManager.getConnection()) {
 
             if (userExists(user)) {
@@ -59,7 +57,7 @@ public class UserDataSQL extends DataAccess {
         }
     }
 
-    public UserData getUser(String username) throws DataAccessException, ServerException {
+    public User getUser(String username) throws DataAccessException, ServerException {
         try (var conn = DatabaseManager.getConnection()) {
 
             var sql = "SELECT * FROM user WHERE username = ?;";
@@ -67,7 +65,7 @@ public class UserDataSQL extends DataAccess {
                 stmt.setString(1, username);
                 var rs = stmt.executeQuery();
                 if (rs.next()) {
-                    return new UserData(rs.getString("username"), rs.getString("password"), rs.getString("email"));
+                    return new User(rs.getString("username"), rs.getString("password"), rs.getString("email"));
                 }
                 return null;
             } catch (SQLException e) {
@@ -79,7 +77,7 @@ public class UserDataSQL extends DataAccess {
         }
     }
 
-    public boolean userExists(UserData user) throws DataAccessException, ServerException {
+    public boolean userExists(User user) throws DataAccessException, ServerException {
         try (var conn = DatabaseManager.getConnection()) {
 
             var sql = "SELECT * FROM user WHERE username = ?;";
@@ -111,7 +109,7 @@ public class UserDataSQL extends DataAccess {
         }
     }
 
-    public void deleteUser(UserData user) throws DataAccessException, ServerException {
+    public void deleteUser(User user) throws DataAccessException, ServerException {
         try (var conn = DatabaseManager.getConnection()) {
 
             if (!userExists(user)) {

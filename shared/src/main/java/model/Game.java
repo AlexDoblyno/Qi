@@ -5,7 +5,7 @@ import chess.ChessGame;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class GameData {
+public class Game {
 
     private int gameID;
     private String whiteUsername;
@@ -14,7 +14,7 @@ public class GameData {
     private String gameName;
     private ChessGame game;
 
-    public GameData() {
+    public Game() {
         this.gameID = Integer.parseInt(null);
         this.whiteUsername = null;
         this.blackUsername = null;
@@ -23,7 +23,7 @@ public class GameData {
         this.game = new ChessGame();
     }
 
-    public GameData(int gameID, String whiteUsername, String blackUsername, HashSet<String> spectators, String gameName, ChessGame game) {
+    public Game(int gameID, String whiteUsername, String blackUsername, HashSet<String> spectators, String gameName, ChessGame game) {
         this.gameID = gameID;
         this.whiteUsername = whiteUsername;
         this.blackUsername = blackUsername;
@@ -88,7 +88,7 @@ public class GameData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GameData game1 = (GameData) o;
+        Game game1 = (Game) o;
         return Objects.equals(gameID, game1.gameID) && Objects.equals(whiteUsername, game1.whiteUsername) && Objects.equals(blackUsername, game1.blackUsername) && Objects.equals(spectators, game1.spectators) && Objects.equals(gameName, game1.gameName) && Objects.equals(game, game1.game);
     }
 

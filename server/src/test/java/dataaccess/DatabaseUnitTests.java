@@ -2,8 +2,8 @@ package dataaccess;
 
 import chess.ChessGame;
 import model.AuthData;
-import model.UserData;
-import model.GameData;
+import model.User;
+import model.Game;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import static dataaccess.AuthDAO.*;
-import static dataaccess.UserDAO.*;
-import static dataaccess.GameDAO.*;
 
 public class DatabaseUnitTests {
 
@@ -100,7 +98,7 @@ public class DatabaseUnitTests {
     @Test
     public void clearUserSuccess() throws DataAccessException {
         // Positive
-        createUser(new UserData("bm888", "brickwall", "bm888@byu.edu"));
+        createUser(new User("bm888", "brickwall", "bm888@byu.edu"));
         UserDAO.clear();
         Assertions.assertNull(getUser("bm888"));
     }
@@ -108,36 +106,36 @@ public class DatabaseUnitTests {
     @Test
     public void createUserSuccess() throws DataAccessException {
         // positive
-        createUser(new UserData("bm888", "brickwall", "bm888@byu.edu"));
-        UserData userData = getUser("bm888");
-        Assertions.assertNotNull(userData);
-        Assertions.assertEquals("brickwall", userData.password());
+        createUser(new User("bm888", "brickwall", "bm888@byu.edu"));
+        User user = getUser("bm888");
+        Assertions.assertNotNull(user);
+        Assertions.assertEquals("brickwall", user.password());
     }
 
     @Test
     public void createUserFail() throws DataAccessException {
         // Negative
-        createUser(new UserData("bm888", "brickwall", "bm888@byu.edu"));
+        createUser(new User("bm888", "brickwall", "bm888@byu.edu"));
         Assertions.assertThrows(DataAccessException.class, () ->
-                createUser(new UserData("bm888", "brickwall", "bm888@byu.edu")));
+                createUser(new User("bm888", "brickwall", "bm888@byu.edu")));
     }
 
     @Test
     public void getUserSuccess() throws DataAccessException {
         // positive
-        createUser(new UserData("bm888", "brickwall", "bm888@byu.edu"));
-        createUser(new UserData("bm", "brickwall", "bm888@byu.edu"));
-        UserData userData = getUser("bm");
-        Assertions.assertNotNull(userData);
-        Assertions.assertEquals("brickwall", userData.password());
+        createUser(new User("bm888", "brickwall", "bm888@byu.edu"));
+        createUser(new User("bm", "brickwall", "bm888@byu.edu"));
+        User user = getUser("bm");
+        Assertions.assertNotNull(user);
+        Assertions.assertEquals("brickwall", user.password());
     }
 
     @Test
     public void getUserFail() throws DataAccessException {
         // negative
-        createUser(new UserData("bm888", "brickwall", "bm888@byu.edu"));
-        UserData userData = getUser("bm");
-        Assertions.assertNull(userData);
+        createUser(new User("bm888", "brickwall", "bm888@byu.edu"));
+        User user = getUser("bm");
+        Assertions.assertNull(user);
     }
 
     // GameDAO
@@ -145,7 +143,7 @@ public class DatabaseUnitTests {
     @Test
     public void clearGameSuccess() throws DataAccessException {
         // Positive
-        createGame(new GameData(1234,
+        createGame(new Game(1234,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
         GameDAO.clear();
         Assertions.assertNull(getGame(1234));
@@ -154,51 +152,51 @@ public class DatabaseUnitTests {
     @Test
     public void createGameSuccess() throws DataAccessException {
         // positive
-        createGame(new GameData(1234,
+        createGame(new Game(1234,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
-        GameData gameData = getGame(1234);
-        Assertions.assertNotNull(gameData);
-        Assertions.assertEquals("game1", gameData.getGameName());
+        Game game = getGame(1234);
+        Assertions.assertNotNull(game);
+        Assertions.assertEquals("game1", game.getGameName());
     }
 
     @Test
     public void createGameFail() throws DataAccessException {
         // Negative
-        createGame(new GameData(1234,
+        createGame(new Game(1234,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
         Assertions.assertThrows(DataAccessException.class, () ->
-                createGame(new GameData(1234,
+                createGame(new Game(1234,
                         null, null, new HashSet<>(), "game1", new ChessGame())));
     }
 
     @Test
     public void getGameSuccess() throws DataAccessException {
         // positive
-        createGame(new GameData(1234,
+        createGame(new Game(1234,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
-        createGame(new GameData(123,
+        createGame(new Game(123,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
-        GameData gameData = getGame(123);
-        Assertions.assertNotNull(gameData);
-        Assertions.assertEquals("game1", gameData.getGameName());
+        Game game = getGame(123);
+        Assertions.assertNotNull(game);
+        Assertions.assertEquals("game1", game.getGameName());
     }
 
     @Test
     public void getGameFail() throws DataAccessException {
         // negative
-        createGame(new GameData(1234,
+        createGame(new Game(1234,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
-        GameData gameData = getGame(123);
-        Assertions.assertNull(gameData);
+        Game game = getGame(123);
+        Assertions.assertNull(game);
     }
 
     @Test
     public void listGameSuccess() throws DataAccessException {
-        createGame(new GameData(1234,
+        createGame(new Game(1234,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
-        createGame(new GameData(12345,
+        createGame(new Game(12345,
                 null, null, new HashSet<>() ,"game2", new ChessGame()));
-        ArrayList<GameData> games = (ArrayList<GameData>) listGames();
+        ArrayList<Game> games = (ArrayList<Game>) listGames();
         Assertions.assertNotNull(games);
         Assertions.assertEquals("game1", games.get(0).getGameName());
         Assertions.assertEquals("game2", games.get(1).getGameName());
@@ -206,41 +204,41 @@ public class DatabaseUnitTests {
 
     @Test
     public void listGameFail() throws DataAccessException {
-        createGame(new GameData(1234,
+        createGame(new Game(1234,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
-        createGame(new GameData(12345,
+        createGame(new Game(12345,
                 null, null, new HashSet<>(), "game2", new ChessGame()));
         GameDAO.clear();
-        ArrayList<GameData> games = (ArrayList<GameData>) listGames();
+        ArrayList<Game> games = (ArrayList<Game>) listGames();
         Assertions.assertTrue(games.isEmpty());
     }
 
     @Test
     public void updateGameSuccess() throws DataAccessException {
-        createGame(new GameData(1234,
+        createGame(new Game(1234,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
-        GameData gameData = getGame(1234);
-        Assertions.assertNotNull(gameData);
-        GameData newGame = new GameData(gameData.getGameID(),
-                "bm888", gameData.getBlackUsername(), gameData.getSpectators(),
-                gameData.getGameName(), gameData.getGame());
+        Game game = getGame(1234);
+        Assertions.assertNotNull(game);
+        Game newGame = new Game(game.getGameID(),
+                "bm888", game.getBlackUsername(), game.getSpectators(),
+                game.getGameName(), game.getGame());
         updateGame(newGame);
-        GameData retrievedGame = getGame(1234);
+        Game retrievedGame = getGame(1234);
         Assertions.assertNotNull(retrievedGame);
         Assertions.assertEquals("bm888", retrievedGame.getWhiteUsername());
     }
 
     @Test
     public void updateGameFail() throws DataAccessException {
-        createGame(new GameData(1234,
+        createGame(new Game(1234,
                 null, null, new HashSet<>(), "game1", new ChessGame()));
-        GameData gameData = getGame(1234);
-        Assertions.assertNotNull(gameData);
-        GameData newGame = new GameData(123,
-                "bm888", gameData.getBlackUsername(), gameData.getSpectators(),
-                gameData.getGameName(), gameData.getGame());
+        Game game = getGame(1234);
+        Assertions.assertNotNull(game);
+        Game newGame = new Game(123,
+                "bm888", game.getBlackUsername(), game.getSpectators(),
+                game.getGameName(), game.getGame());
         updateGame(newGame);
-        GameData retrievedGame = getGame(1234);
+        Game retrievedGame = getGame(1234);
         Assertions.assertNotNull(retrievedGame);
         Assertions.assertNull(retrievedGame.getWhiteUsername());
     }

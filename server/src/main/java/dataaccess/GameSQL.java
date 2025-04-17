@@ -4,7 +4,7 @@ import chess.ChessGame;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import model.GameData;
+import model.Game;
 import server.ServerException;
 
 import java.sql.SQLException;

@@ -1,20 +1,24 @@
 package service;
 
-import dataaccess.DataAccessException;
-import model.AuthData;
+import dataaccess.AuthSQL;
+import dataaccess.GameSQL;
+import dataaccess.UserSQL;
 
-import java.util.UUID;
+public class Service {
 
-import static dataaccess.AuthDAO.getAuth;
+    protected AuthSQL authSQL;
+    protected GameSQL gameSQL;
+    protected UserSQL userSQL;
 
-public interface Service {
-
-    default String generateToken() {
-        return UUID.randomUUID().toString();
+    public Service() {
+        authSQL = new AuthSQL();
+        gameSQL = new GameSQL();
+        userSQL = new UserSQL();
     }
 
-    default boolean authExists(String authToken) throws DataAccessException {
-        AuthData auth = getAuth(authToken);
-        return auth != null;
+    public Service(AuthSQL authSQL, GameSQL gameSQL, UserSQL userSQL) {
+        this.authSQL = authSQL;
+        this.gameSQL = gameSQL;
+        this.userSQL = userSQL;
     }
 }

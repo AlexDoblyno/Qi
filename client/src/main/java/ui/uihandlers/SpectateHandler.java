@@ -1,7 +1,7 @@
 package ui.uihandlers;
 
 import model.AuthToken;
-import model.GameData;
+import model.Game;
 import resultclasses.JoinGameResult;
 import serverfacade.ServerFacade;
 import ui.Printer;
@@ -14,7 +14,7 @@ public class SpectateHandler extends Handler {
         super(serverFacade);
     }
 
-    public JoinGameResult spectate(String[] words, AuthToken authToken, List<GameData> previousList) {
+    public JoinGameResult spectate(String[] words, AuthToken authToken, List<Game> previousList) {
         if (words.length != 2) {
             p.reset();
             p.setColor(Printer.Color.RED);
@@ -30,7 +30,7 @@ public class SpectateHandler extends Handler {
                 p.println("Error: Invalid game index");
                 return null;
             }
-            GameData selectedGame = previousList.get(gameIndex - 1);
+            Game selectedGame = previousList.get(gameIndex - 1);
             int gameID = selectedGame.getGameID();
             var result = serverFacade.joinGame(authToken, Integer.valueOf(gameID), null);
             result.setGameID(gameID);

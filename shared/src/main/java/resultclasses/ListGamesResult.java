@@ -1,16 +1,16 @@
 package resultclasses;
 
-import model.GameData;
+import model.Game;
 
 public class ListGamesResult extends Result {
 
-    private GameData[] games;
+    private Game[] games;
 
     public ListGamesResult() {
         super();
     }
 
-    public ListGamesResult(GameData[] games) {
+    public ListGamesResult(Game[] games) {
         super(200);
         this.games = games;
     }
@@ -19,7 +19,7 @@ public class ListGamesResult extends Result {
         super(status, message);
     }
 
-    public GameData[] getGames() {
+    public Game[] getGames() {
         return games;
     }
 }

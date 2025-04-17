@@ -1,5 +1,5 @@
 package model;
 
-public record GamesList(GameData[] games) {
+public record GamesList(Game[] games) {
 
 }

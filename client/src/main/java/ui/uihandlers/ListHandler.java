@@ -1,7 +1,7 @@
 package ui.uihandlers;
 
 import model.AuthToken;
-import model.GameData;
+import model.Game;
 import resultclasses.ListGamesResult;
 import serverfacade.ServerFacade;
 import ui.Printer;
@@ -12,14 +12,14 @@ public class ListHandler extends Handler {
         super(serverFacade);
     }
 
-    public GameData[] list(AuthToken authToken) {
+    public Game[] list(AuthToken authToken) {
         try {
             ListGamesResult res = serverFacade.listGames(authToken);
             p.reset();
             p.setColor(Printer.Color.GREEN);
             p.println("Games:");
             int index = 1;
-            for (GameData game : res.getGames()) {
+            for (Game game : res.getGames()) {
                 p.println(index + ") " + "Game ID: " + game.getGameID() + " | Game Name: " + game.getGameName() + " | White Username: " + game.getWhiteUsername() + " | Black Username: " + game.getBlackUsername());
                 index++;
             }

@@ -2,5 +2,5 @@ package model;
 
 import java.util.List;
 
-public record ListResult(List<GameData> games) {
+public record ListResult(List<Game> games) {
 }
