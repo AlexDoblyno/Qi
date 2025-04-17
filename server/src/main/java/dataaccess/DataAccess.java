@@ -1,6 +1,6 @@
 package dataaccess;
 
-public interface DataAccess {
+public class DataAccess {
 
     String[] CREATE_STATEMENTS = {
             """

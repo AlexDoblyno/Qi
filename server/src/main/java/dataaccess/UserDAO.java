@@ -1,52 +1,42 @@
 package dataaccess;
 
-import model.UserData;
+import model.User;
 
-import java.sql.SQLException;
+import java.util.HashMap;
 
-public interface UserDAO {
+public class UserDAO extends DataAccess {
 
-    static void clear() throws DataAccessException {
-        var statement = "TRUNCATE TABLE user";
-        try (var conn = DatabaseManager.getConnection()) {
-            try (var preparedStatement = conn.prepareStatement(statement)) {
-                preparedStatement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            throw new DataAccessException(e.getMessage());
-        }
+    // This was for development purposes to test API endpoints with an in-memory database.
+    // The database has been shifted to use MySQL, so this file is deprecated and no longer used.
+
+    private HashMap<String, User> users = new HashMap<>();
+
+    public UserDAO() {
+        super();
     }
 
-    static void createUser(UserData newUser) throws DataAccessException {
-        var statement = "INSERT INTO user (username, password, email) VALUES (?, ?, ?)";
-        try (var conn = DatabaseManager.getConnection()) {
-            try (var preparedStatement = conn.prepareStatement(statement)) {
-                preparedStatement.setString(1, newUser.username());
-                preparedStatement.setString(2, newUser.password());
-                preparedStatement.setString(3, newUser.email());
-                preparedStatement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            throw new DataAccessException(e.getMessage());
+    public void addUser(User user) throws DataAccessException {
+        if (userExists(user)) {
+            throw new DataAccessException("Error: Username already exists");
         }
+
+        users.put(user.username(), user);
     }
 
-    static UserData getUser(String username) throws DataAccessException {
-        var statement = "SELECT username, password, email FROM user WHERE username=?";
-        try (var conn = DatabaseManager.getConnection()) {
-            try (var ps = conn.prepareStatement(statement)) {
-                ps.setString(1, username);
-                try (var rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        return new UserData(rs.getString("username"),
-                                rs.getString("password"),
-                                rs.getString("email"));
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            throw new DataAccessException(String.format(e.getMessage()));
+    public User getUser(String username) throws DataAccessException {
+        if (!userExists(new User(username, null, null))) {
+            throw new DataAccessException("Error: Username does not exist");
         }
-        return null;
+
+        return users.get(username);
     }
+
+    public boolean userExists(User user) {
+        return users.containsKey(user.username());
+    }
+
+    public void clear() throws DataAccessException {
+        users.clear();
+    }
+
 }

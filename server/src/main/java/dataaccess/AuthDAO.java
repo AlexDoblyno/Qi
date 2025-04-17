@@ -4,7 +4,7 @@ import model.AuthData;
 
 import java.sql.SQLException;
 
-public interface AuthDAO {
+public interface AuthDAO extends DataAccess{
 
     static void clear() throws DataAccessException {
         var statement = "TURNCATE TABLE auth";

@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="542f0c6c-1f06-4c14-9e44-c1a3151aef89" name="更改" comment="调整ClientDAO以及核对ServerFacadeTest，记得查看share部分">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/AuthSQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameSQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/UserSQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/server/ServerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/server/bak/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/client/client/ServerFacadeTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/client/client/ServerFacadeTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/dataaccess/DatabaseUnitTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/dataaccess/DatabaseUnitTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/service/ServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/service/ServiceTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/test-classes/dataaccess/DatabaseUnitTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/test-classes/dataaccess/DatabaseUnitTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/target/test-classes/service/ServiceTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/target/test-classes/service/ServiceTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/test/java/ServerFacadeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/test/java/ServerFacadeTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/AuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/AuthDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/DataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/GameDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/passoff/server/DatabaseTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/passoff/server/DatabaseTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/passoff/server/StandardAPITests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/passoff/server/StandardAPITests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +61,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "JUnit.ServerFacadeTests.executor": "Run",
+    "JUnit.StandardAPITests.executor": "Run",
     "JUnit.client中的ui.executor": "Run",
     "JUnit.server中的handler.executor": "Run",
     "JUnit.shared中的passoff.chess.executor": "Debug",
@@ -61,7 +70,7 @@
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "E:/IntelliJ/ChessNew/client/src/main/java/client",
-    "last_opened_file_path": "E:/IntelliJ/ChessNew/client/src/main/java",
+    "last_opened_file_path": "E:/IntelliJ/ChessNew/server/src/main/java/dataaccess",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -72,16 +81,19 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IntelliJ\ChessNew\server\src\main\java\dataaccess" />
+      <recent name="E:\IntelliJ\ChessNew\server\src\main\java" />
       <recent name="E:\IntelliJ\ChessNew\client\src\main\java" />
       <recent name="E:\IntelliJ\ChessNew\shared\src\main\java" />
       <recent name="E:\IntelliJ\ChessNew\client\src\main\java\ui" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="dataaccess" />
       <recent name="model" />
       <recent name="ui" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ServerFacadeTests">
+  <component name="RunManager" selected="JUnit.StandardAPITests">
     <configuration name="ServerFacadeTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="client" />
       <extension name="coverage">
@@ -92,6 +104,21 @@
       </extension>
       <option name="PACKAGE_NAME" value="client" />
       <option name="MAIN_CLASS_NAME" value="client.ServerFacadeTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StandardAPITests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoff.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoff.server" />
+      <option name="MAIN_CLASS_NAME" value="passoff.server.StandardAPITests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -141,6 +168,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.StandardAPITests" />
         <item itemvalue="JUnit.ServerFacadeTests" />
         <item itemvalue="JUnit.shared中的passoff.chess" />
         <item itemvalue="JUnit.server中的handler" />
@@ -169,7 +197,8 @@
       <workItem from="1744063941942" duration="4889000" />
       <workItem from="1744705124676" duration="947000" />
       <workItem from="1744748832259" duration="13000" />
-      <workItem from="1744748893925" duration="17400000" />
+      <workItem from="1744748893925" duration="17601000" />
+      <workItem from="1744781359580" duration="7307000" />
     </task>
     <task id="LOCAL-00001" summary="Changes">
       <option name="closed" value="true" />
@@ -235,7 +264,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744775858277</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="调整ClientDAO以及核对ServerFacadeTest，记得查看share部分">
+      <option name="closed" value="true" />
+      <created>1744781317401</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744781317401</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

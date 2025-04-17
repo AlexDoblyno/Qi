@@ -5,10 +5,8 @@ import resultclasses.CreateGameResult;
 import resultclasses.LoginResult;
 import resultclasses.RegisterResult;
 import org.junit.jupiter.api.*;
-import server.Server;
+import server.bak.Server;
 import serverfacade.ServerFacade;
-
-import java.rmi.ServerException;
 
 public class ServerFacadeTests {
 
